@@ -17,7 +17,7 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <Link to="/" className="flex items-center space-x-2">
-              <img src="/src/pages/company-logo.png" alt="Company Logo" className="w-8 h-8" />
+              <img src="/company-logo.png" alt="Company Logo" className="w-8 h-8" />
               <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
                 SSWebTech
               </span>
@@ -65,7 +65,7 @@ const About = () => {
               <CardHeader className="text-center pb-4" data-id="aoebja20c" data-path="src/pages/About.tsx">
                 <div className="w-32 h-32 mx-auto mb-6 relative" data-id="xi339jyvq" data-path="src/pages/About.tsx">
                   <img
-                    src="/src/pages/owner-image.jpg"
+                    src="/owner-image.jpg"
                     alt="Founder"
                     className="w-full h-full rounded-full object-cover shadow-lg group-hover:scale-105 transition-transform duration-300" data-id="pht1e2bmt" data-path="src/pages/About.tsx" />
 
@@ -122,7 +122,7 @@ const About = () => {
               <CardHeader className="text-center pb-4" data-id="c0ygyhocv" data-path="src/pages/About.tsx">
                 <div className="w-32 h-32 mx-auto mb-6 relative" data-id="l9ujw8mta" data-path="src/pages/About.tsx">
                   <img
-                    src="/src/pages/director-image.png"
+                    src="/director-image.png"
                     alt="Director"
                     className="w-full h-full rounded-full object-cover shadow-lg group-hover:scale-105 transition-transform duration-300" data-id="i5i23exvt" data-path="src/pages/About.tsx" />
 

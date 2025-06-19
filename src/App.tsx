@@ -18,7 +18,7 @@ function ContactButton() {
       {isOpen && (
         <div className="flex flex-col items-center space-y-2 mb-2">
           <a href="https://wa.me/9391502293" className="bg-green-500 p-3 rounded-full shadow-lg hover:bg-green-600">
-            <img src="/src/pages/whatsapp.png" alt="WhatsApp" className="w-8 h-8 object-cover" />
+            <img src="/whatsapp.png" alt="WhatsApp" className="w-8 h-8 object-cover" />
           </a>
           <a href="tel:9391502293" className="bg-green-500 p-4 rounded-full shadow-lg hover:bg-green-600">
             <Phone className="w-6 h-6 text-white" />

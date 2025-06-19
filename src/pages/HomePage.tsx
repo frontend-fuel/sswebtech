@@ -149,7 +149,7 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-id="waas28m5w" data-path="src/pages/HomePage.tsx">
           <div className="flex justify-between items-center py-4" data-id="bpea7zidr" data-path="src/pages/HomePage.tsx">
             <Link to="/" className="flex items-center space-x-2" data-id="irr9m44co" data-path="src/pages/HomePage.tsx">
-              <img src="/src/pages/company-logo.png" alt="Company Logo" className="w-10 h-10" />
+              <img src="/company-logo.png" alt="Company Logo" className="w-10 h-10" />
               <span className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent" data-id="lbkwm6zr6" data-path="src/pages/HomePage.tsx">
                 SSWebTech
               </span>
@@ -401,7 +401,7 @@ const HomePage = () => {
           <div className="grid md:grid-cols-4 gap-8" data-id="nbi2rc0qz" data-path="src/pages/HomePage.tsx">
             <div className="md:col-span-2" data-id="sby0h0dcq" data-path="src/pages/HomePage.tsx">
               <Link to="/" className="flex items-center space-x-2 mb-4" data-id="r1fomt6ss" data-path="src/pages/HomePage.tsx">
-                <img src="/src/pages/company-logo.png" alt="Company Logo" className="w-10 h-10" />
+                <img src="/company-logo.png" alt="Company Logo" className="w-10 h-10" />
                 <span className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent" data-id="km444ql9y" data-path="src/pages/HomePage.tsx">SSWebTech</span>
               </Link>
               <p className="text-gray-400 mb-4" data-id="ggwm83d6z" data-path="src/pages/HomePage.tsx">

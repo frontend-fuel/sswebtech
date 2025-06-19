@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSWebTech University</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#3b82f6',secondary:'#64748b'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <link rel="icon" href="/src/pages/company-logo.png" type="image/png">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .hero-section {
+            background-image: url('https://readdy.ai/api/search-image?query=modern%20university%20campus%20with%20beautiful%20architecture%2C%20green%20spaces%2C%20students%20walking%2C%20natural%20lighting%2C%20bright%20atmosphere%2C%20academic%20buildings%2C%20autumn%20season%2C%20clear%20blue%20sky%2C%20professional%20photography%2C%20high%20resolution%2C%20wide%20angle&width=1920&height=800&seq=campus1&orientation=landscape');
+            background-size: cover;
+            background-position: center;
+        }
+        .custom-checkbox {
+            position: relative;
+            padding-left: 28px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .custom-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            background-color: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 4px;
+        }
+        .custom-checkbox:hover input ~ .checkmark {
+            border-color: #cbd5e1;
+        }
+        .custom-checkbox input:checked ~ .checkmark {
+            background-color: #3b82f6;
+            border-color: #3b82f6;
+        }
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+        .custom-checkbox input:checked ~ .checkmark:after {
+            display: block;
+        }
+        .custom-checkbox .checkmark:after {
+            left: 6px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        .language-selector {
+            position: relative;
+        }
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            z-index: 10;
+            min-width: 120px;
+        }
+        .cookie-notice {
+            display: none;
+        }
+        .accessibility-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 300px;
+            background-color: white;
+            box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 50;
+            padding: 20px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Top Header -->
+    <div class="bg-gray-100 py-2 border-b border-gray-200">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4 text-sm">
+                <a href="tel:+12345678900" class="text-gray-600 hover:text-primary flex items-center">
+                    <div class="w-4 h-4 flex items-center justify-center mr-1">
+                        <i class="ri-phone-line"></i>
+                    </div>
+                    <span>(234) 567-8900</span>
+                </a>
+                <a href="mailto:info@westfield.edu" class="text-gray-600 hover:text-primary flex items-center">
+                    <div class="w-4 h-4 flex items-center justify-center mr-1">
+                        <i class="ri-mail-line"></i>
+                    </div>
+                    <span>info@westfield.edu</span>
+                </a>
+            </div>
+            <div class="flex items-center space-x-4 text-sm">
+                <a href="#" class="text-gray-600 hover:text-primary">Alumni</a>
+                <a href="#" class="text-gray-600 hover:text-primary">Careers</a>
+                <a href="#" class="text-gray-600 hover:text-primary">Donate</a>
+                <div class="language-selector">
+                    <button id="language-button" class="text-gray-600 hover:text-primary flex items-center">
+                        <div class="w-4 h-4 flex items-center justify-center mr-1">
+                            <i class="ri-global-line"></i>
+                        </div>
+                        <span>EN</span>
+                        <div class="w-4 h-4 flex items-center justify-center ml-1">
+                            <i class="ri-arrow-down-s-line"></i>
+                        </div>
+                    </button>
+                    <div id="language-dropdown" class="language-dropdown">
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">English</a>
+                        
+                    </div>
+                </div>
+                <button id="accessibility-toggle" class="text-gray-600 hover:text-primary flex items-center">
+                    <div class="w-4 h-4 flex items-center justify-center mr-1">
+                        <i class="ri-settings-3-line"></i>
+                    </div>
+                    <span>Accessibility</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="#" class="font-['Pacifico'] text-3xl text-primary mr-10">SSWebTech</a>
+                    <nav class="hidden lg:flex space-x-8">
+                        <a href="#" class="text-gray-800 font-medium hover:text-primary border-b-2 border-primary py-1">Home</a>
+                        <a href="#" class="text-gray-800 font-medium hover:text-primary border-b-2 border-transparent py-1">Academics</a>
+                        <a href="#" class="text-gray-800 font-medium hover:text-primary border-b-2 border-transparent py-1">Admissions</a>
+                        <a href="#" class="text-gray-800 font-medium hover:text-primary border-b-2 border-transparent py-1">Campus Life</a>
+                        <a href="#" class="text-gray-800 font-medium hover:text-primary border-b-2 border-transparent py-1">Research</a>
+                        <a href="#" class="text-gray-800 font-medium hover:text-primary border-b-2 border-transparent py-1">About Us</a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative hidden md:block">
+                        <input type="text" placeholder="Search..." class="pl-10 pr-4 py-2 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm w-56">
+                        <div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-500">
+                            <i class="ri-search-line"></i>
+                        </div>
+                    </div>
+                    <a href="#" class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition duration-200 whitespace-nowrap">Login</a>
+                    <button class="lg:hidden w-10 h-10 flex items-center justify-center text-gray-700" id="mobile-menu-button">
+                        <i class="ri-menu-line text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="lg:hidden hidden bg-white absolute w-full border-t border-gray-200" id="mobile-menu">
+            <div class="container mx-auto px-4 py-3">
+                <div class="flex flex-col space-y-3">
+                    <a href="#" class="text-gray-800 font-medium py-2 border-b border-gray-100">Home</a>
+                    <a href="#" class="text-gray-800 font-medium py-2 border-b border-gray-100">Academics</a>
+                    <a href="#" class="text-gray-800 font-medium py-2 border-b border-gray-100">Admissions</a>
+                    <a href="#" class="text-gray-800 font-medium py-2 border-b border-gray-100">Campus Life</a>
+                    <a href="#" class="text-gray-800 font-medium py-2 border-b border-gray-100">Research</a>
+                    <a href="#" class="text-gray-800 font-medium py-2 border-b border-gray-100">About Us</a>
+                    <div class="relative py-2">
+                        <input type="text" placeholder="Search..." class="w-full pl-10 pr-4 py-2 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm">
+                        <div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-500">
+                            <i class="ri-search-line"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Emergency Alert (hidden by default) -->
+    <div id="emergency-alert" class="hidden bg-red-600 text-white py-3">
+        <div class="container mx-auto px-4 flex items-center">
+            <div class="w-6 h-6 flex items-center justify-center mr-2">
+                <i class="ri-alarm-warning-line"></i>
+            </div>
+            <p class="font-medium">EMERGENCY ALERT: Campus is operating normally. This is a test of the emergency notification system.</p>
+            <button class="ml-auto w-6 h-6 flex items-center justify-center" id="close-alert">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Announcement Banner -->
+    <div class="bg-primary/10 py-2 border-b border-primary/20">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-center text-sm text-primary">
+                <div class="w-5 h-5 flex items-center justify-center mr-2">
+                    <i class="ri-megaphone-line"></i>
+                </div>
+                <p>Fall 2025 applications are now open! <a href="#" class="underline font-medium">Apply today</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-gray-900/70 to-gray-900/30"></div>
+        <div class="container mx-auto px-4 py-24 md:py-32 relative z-10">
+            <div class="max-w-2xl text-white">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Shaping Tomorrow's Leaders Today</h1>
+                <p class="text-xl mb-8">Westfield University offers world-class education with over 200 programs across 12 colleges. Join our community of 35,000 students from 120 countries.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#" class="bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-primary/90 transition duration-200 whitespace-nowrap">Apply Now</a>
+                    <a href="#" class="bg-white text-gray-800 px-6 py-3 rounded-button font-medium hover:bg-gray-100 transition duration-200 whitespace-nowrap">Schedule a Visit</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Access Grid -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <a href="#" class="group bg-white rounded-lg shadow-md hover:shadow-lg transition duration-200 p-6 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary/20 transition duration-200">
+                        <i class="ri-user-3-line text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Student Portal</h3>
+                    <p class="text-gray-600">Access your courses, grades, and campus resources</p>
+                </a>
+                <a href="#" class="group bg-white rounded-lg shadow-md hover:shadow-lg transition duration-200 p-6 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary/20 transition duration-200">
+                        <i class="ri-team-line text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Faculty Portal</h3>
+                    <p class="text-gray-600">Teaching resources, research tools, and administrative services</p>
+                </a>
+                <a href="#" class="group bg-white rounded-lg shadow-md hover:shadow-lg transition duration-200 p-6 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary/20 transition duration-200">
+                        <i class="ri-book-open-line text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Library</h3>
+                    <p class="text-gray-600">Explore our extensive collection of resources and databases</p>
+                </a>
+                <a href="#" class="group bg-white rounded-lg shadow-md hover:shadow-lg transition duration-200 p-6 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary/20 transition duration-200">
+                        <i class="ri-calendar-event-line text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Events</h3>
+                    <p class="text-gray-600">Stay updated with campus events, lectures, and activities</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Programs -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Our Colleges & Programs</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Discover our diverse range of academic programs designed to prepare you for success in your chosen field.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=modern%20business%20school%20classroom%20with%20students%20engaged%20in%20discussion%2C%20professional%20setting%2C%20business%20attire%2C%20clean%20modern%20architecture%2C%20bright%20lighting%2C%20collaborative%20learning%20environment%2C%20high%20quality&width=600&height=400&seq=business1&orientation=landscape" alt="Business School" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">College of Business</h3>
+                        <p class="text-gray-600 mb-4">Offering programs in Finance, Marketing, Management, and Entrepreneurship with strong industry connections.</p>
+                        <a href="#" class="text-primary font-medium flex items-center hover:underline">
+                            Learn More
+                            <div class="w-5 h-5 flex items-center justify-center ml-1">
+                                <i class="ri-arrow-right-line"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=engineering%20laboratory%20with%20students%20working%20on%20robotics%20project%2C%20modern%20equipment%2C%20technical%20environment%2C%20computer%20screens%2C%20circuit%20boards%2C%20collaborative%20workspace%2C%20bright%20lighting%2C%20high%20quality&width=600&height=400&seq=engineering1&orientation=landscape" alt="Engineering School" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">College of Engineering</h3>
+                        <p class="text-gray-600 mb-4">Innovative programs in Mechanical, Electrical, Civil, and Computer Engineering with state-of-the-art facilities.</p>
+                        <a href="#" class="text-primary font-medium flex items-center hover:underline">
+                            Learn More
+                            <div class="w-5 h-5 flex items-center justify-center ml-1">
+                                <i class="ri-arrow-right-line"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=medical%20school%20laboratory%20with%20students%20in%20white%20coats%20examining%20specimens%2C%20microscopes%2C%20medical%20charts%2C%20clinical%20environment%2C%20professional%20setting%2C%20bright%20lighting%2C%20high%20quality&width=600&height=400&seq=medical1&orientation=landscape" alt="Medical School" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">College of Medicine</h3>
+                        <p class="text-gray-600 mb-4">Comprehensive medical education with programs in Medicine, Nursing, Public Health, and Biomedical Sciences.</p>
+                        <a href="#" class="text-primary font-medium flex items-center hover:underline">
+                            Learn More
+                            <div class="w-5 h-5 flex items-center justify-center ml-1">
+                                <i class="ri-arrow-right-line"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=arts%20and%20humanities%20classroom%20with%20students%20engaged%20in%20creative%20discussion%2C%20artwork%20on%20walls%2C%20literature%20books%2C%20cultural%20artifacts%2C%20bright%20natural%20lighting%2C%20collaborative%20atmosphere%2C%20high%20quality&width=600&height=400&seq=arts1&orientation=landscape" alt="Arts School" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">College of Arts & Humanities</h3>
+                        <p class="text-gray-600 mb-4">Explore programs in Literature, History, Philosophy, Fine Arts, and Cultural Studies with renowned faculty.</p>
+                        <a href="#" class="text-primary font-medium flex items-center hover:underline">
+                            Learn More
+                            <div class="w-5 h-5 flex items-center justify-center ml-1">
+                                <i class="ri-arrow-right-line"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=science%20laboratory%20with%20students%20conducting%20experiments%2C%20test%20tubes%2C%20microscopes%2C%20scientific%20equipment%2C%20white%20lab%20coats%2C%20bright%20lighting%2C%20professional%20environment%2C%20high%20quality&width=600&height=400&seq=science1&orientation=landscape" alt="Science School" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">College of Sciences</h3>
+                        <p class="text-gray-600 mb-4">Cutting-edge programs in Physics, Chemistry, Biology, and Environmental Science with research opportunities.</p>
+                        <a href="#" class="text-primary font-medium flex items-center hover:underline">
+                            Learn More
+                            <div class="w-5 h-5 flex items-center justify-center ml-1">
+                                <i class="ri-arrow-right-line"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=computer%20science%20classroom%20with%20students%20working%20on%20computers%2C%20coding%20on%20screens%2C%20modern%20technology%2C%20collaborative%20digital%20environment%2C%20bright%20lighting%2C%20professional%20setting%2C%20high%20quality&width=600&height=400&seq=cs1&orientation=landscape" alt="Computer Science School" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">College of Computing</h3>
+                        <p class="text-gray-600 mb-4">Innovative programs in Computer Science, Data Science, Artificial Intelligence, and Cybersecurity.</p>
+                        <a href="#" class="text-primary font-medium flex items-center hover:underline">
+                            Learn More
+                            <div class="w-5 h-5 flex items-center justify-center ml-1">
+                                <i class="ri-arrow-right-line"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-10">
+                <a href="#" class="bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-primary/90 transition duration-200 whitespace-nowrap">View All Programs</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- News & Events Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">News & Events</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Stay updated with the latest happenings at Westfield University.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- News Column -->
+                <div>
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold">Latest News</h3>
+                        <a href="#" class="text-primary font-medium hover:underline">View All</a>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                                <img src="https://readdy.ai/api/search-image?query=university%20research%20laboratory%20with%20scientists%20working%20on%20advanced%20technology%2C%20professional%20setting%2C%20scientific%20equipment%2C%20bright%20lighting%2C%20high%20quality&width=200&height=200&seq=news1&orientation=squarish" alt="Research News" class="w-full h-full object-cover object-top">
+                            </div>
+                            <div>
+                                <span class="text-sm text-gray-500">June 15, 2025</span>
+                                <h4 class="font-medium mb-1">Westfield Researchers Secure $5M Grant for Climate Study</h4>
+                                <a href="#" class="text-primary text-sm hover:underline">Read More</a>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                                <img src="https://readdy.ai/api/search-image?query=university%20graduation%20ceremony%20with%20diverse%20students%20in%20caps%20and%20gowns%2C%20celebration%2C%20achievement%2C%20bright%20lighting%2C%20professional%20photography%2C%20high%20quality&width=200&height=200&seq=news2&orientation=squarish" alt="Graduation News" class="w-full h-full object-cover object-top">
+                            </div>
+                            <div>
+                                <span class="text-sm text-gray-500">June 10, 2025</span>
+                                <h4 class="font-medium mb-1">Class of 2025 Celebrates Record-Breaking Graduation</h4>
+                                <a href="#" class="text-primary text-sm hover:underline">Read More</a>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                                <img src="https://readdy.ai/api/search-image?query=university%20partnership%20signing%20ceremony%20with%20business%20executives%20and%20university%20officials%2C%20professional%20setting%2C%20handshakes%2C%20formal%20attire%2C%20bright%20lighting%2C%20high%20quality&width=200&height=200&seq=news3&orientation=squarish" alt="Partnership News" class="w-full h-full object-cover object-top">
+                            </div>
+                            <div>
+                                <span class="text-sm text-gray-500">June 5, 2025</span>
+                                <h4 class="font-medium mb-1">Westfield Partners with Tech Giant for New Innovation Hub</h4>
+                                <a href="#" class="text-primary text-sm hover:underline">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Events Column -->
+                <div>
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold">Upcoming Events</h3>
+                        <a href="#" class="text-primary font-medium hover:underline">View All</a>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <div class="flex gap-4 items-start">
+                                <div class="bg-primary/10 rounded-lg p-2 text-center w-16">
+                                    <span class="block text-lg font-bold text-primary">18</span>
+                                    <span class="block text-sm text-primary">Jun</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium mb-1">Summer Research Symposium</h4>
+                                    <div class="flex items-center text-sm text-gray-600 mb-1">
+                                        <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                            <i class="ri-time-line"></i>
+                                        </div>
+                                        <span>9:00 AM - 4:00 PM</span>
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-600">
+                                        <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                            <i class="ri-map-pin-line"></i>
+                                        </div>
+                                        <span>Science Center Auditorium</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <div class="flex gap-4 items-start">
+                                <div class="bg-primary/10 rounded-lg p-2 text-center w-16">
+                                    <span class="block text-lg font-bold text-primary">22</span>
+                                    <span class="block text-sm text-primary">Jun</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium mb-1">Guest Lecture: Future of AI</h4>
+                                    <div class="flex items-center text-sm text-gray-600 mb-1">
+                                        <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                            <i class="ri-time-line"></i>
+                                        </div>
+                                        <span>6:30 PM - 8:00 PM</span>
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-600">
+                                        <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                            <i class="ri-map-pin-line"></i>
+                                        </div>
+                                        <span>Thompson Hall Room 201</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <div class="flex gap-4 items-start">
+                                <div class="bg-primary/10 rounded-lg p-2 text-center w-16">
+                                    <span class="block text-lg font-bold text-primary">25</span>
+                                    <span class="block text-sm text-primary">Jun</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium mb-1">Summer Concert Series</h4>
+                                    <div class="flex items-center text-sm text-gray-600 mb-1">
+                                        <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                            <i class="ri-time-line"></i>
+                                        </div>
+                                        <span>7:00 PM - 9:30 PM</span>
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-600">
+                                        <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                            <i class="ri-map-pin-line"></i>
+                                        </div>
+                                        <span>Campus Green</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Announcements Column -->
+                <div>
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold">Announcements</h3>
+                        <a href="#" class="text-primary font-medium hover:underline">View All</a>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-primary bg-primary/5 p-4">
+                            <span class="text-sm text-gray-500 block mb-1">June 17, 2025</span>
+                            <h4 class="font-medium mb-2">Fall 2025 Registration Opens July 1</h4>
+                            <p class="text-sm text-gray-600">Students can begin registering for Fall 2025 courses starting July 1. Please check your student portal for your specific registration time.</p>
+                        </div>
+                        <div class="border-l-4 border-yellow-500 bg-yellow-50 p-4">
+                            <span class="text-sm text-gray-500 block mb-1">June 16, 2025</span>
+                            <h4 class="font-medium mb-2">Campus Housing Applications Due June 30</h4>
+                            <p class="text-sm text-gray-600">All students planning to live on campus for the 2025-2026 academic year must submit housing applications by June 30.</p>
+                        </div>
+                        <div class="border-l-4 border-green-500 bg-green-50 p-4">
+                            <span class="text-sm text-gray-500 block mb-1">June 14, 2025</span>
+                            <h4 class="font-medium mb-2">Library Extended Hours During Finals Week</h4>
+                            <p class="text-sm text-gray-600">The University Library will be open 24 hours during finals week (June 20-27) to support student study needs.</p>
+                        </div>
+                        <div class="border-l-4 border-purple-500 bg-purple-50 p-4">
+                            <span class="text-sm text-gray-500 block mb-1">June 12, 2025</span>
+                            <h4 class="font-medium mb-2">New Scholarship Opportunities Available</h4>
+                            <p class="text-sm text-gray-600">Several new scholarship opportunities have been added for the upcoming academic year. Application deadline is July 15.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Campus Highlights -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Campus Highlights</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Explore our beautiful campus and discover what makes Westfield University special.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <div class="rounded-lg overflow-hidden shadow-md">
+                    <img src="https://readdy.ai/api/search-image?query=modern%20university%20library%20interior%20with%20students%20studying%2C%20bookshelves%2C%20reading%20areas%2C%20natural%20lighting%2C%20bright%20atmosphere%2C%20academic%20environment%2C%20high%20quality&width=600&height=400&seq=campus2&orientation=landscape" alt="University Library" class="w-full h-64 object-cover object-top">
+                    <div class="p-4 bg-white">
+                        <h3 class="font-semibold text-lg">Thompson Library</h3>
+                        <p class="text-gray-600 text-sm">Our state-of-the-art library houses over 2 million volumes and provides 24/7 study spaces.</p>
+                    </div>
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-md">
+                    <img src="https://readdy.ai/api/search-image?query=modern%20university%20recreation%20center%20with%20fitness%20equipment%2C%20swimming%20pool%2C%20students%20exercising%2C%20bright%20lighting%2C%20clean%20environment%2C%20high%20quality&width=600&height=400&seq=campus3&orientation=landscape" alt="Recreation Center" class="w-full h-64 object-cover object-top">
+                    <div class="p-4 bg-white">
+                        <h3 class="font-semibold text-lg">Recreation Center</h3>
+                        <p class="text-gray-600 text-sm">A 120,000 sq ft facility featuring fitness areas, swimming pools, and courts for various sports.</p>
+                    </div>
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-md">
+                    <img src="https://readdy.ai/api/search-image?query=modern%20university%20student%20center%20with%20lounge%20areas%2C%20dining%20options%2C%20students%20socializing%2C%20bright%20atmosphere%2C%20collaborative%20spaces%2C%20high%20quality&width=600&height=400&seq=campus4&orientation=landscape" alt="Student Center" class="w-full h-64 object-cover object-top">
+                    <div class="p-4 bg-white">
+                        <h3 class="font-semibold text-lg">Student Center</h3>
+                        <p class="text-gray-600 text-sm">The heart of campus life featuring dining options, study spaces, and student organization offices.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- Key Statistics -->
+                <div class="bg-white rounded-lg shadow-md p-8">
+                    <h3 class="text-xl font-semibold mb-6">Westfield by the Numbers</h3>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-primary mb-2">35,000+</div>
+                            <p class="text-gray-600">Students</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-primary mb-2">2,500+</div>
+                            <p class="text-gray-600">Faculty Members</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-primary mb-2">200+</div>
+                            <p class="text-gray-600">Academic Programs</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-primary mb-2">120+</div>
+                            <p class="text-gray-600">Countries Represented</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 text-center">
+                        <a href="#" class="text-primary font-medium hover:underline">Learn More About Westfield</a>
+                    </div>
+                </div>
+                
+                <!-- Testimonials -->
+                <div class="bg-white rounded-lg shadow-md p-8">
+                    <h3 class="text-xl font-semibold mb-6">Student Testimonials</h3>
+                    <div id="testimonials-container" class="relative">
+                        <div id="testimonials" class="space-y-6">
+                            <div class="testimonial">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                                        <img src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20diverse%20female%20student%2C%20natural%20lighting%2C%20neutral%20background%2C%20smiling%2C%20confident%2C%20high%20quality%20portrait&width=100&height=100&seq=student1&orientation=squarish" alt="Student" class="w-full h-full object-cover object-top">
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">Olivia Richardson</h4>
+                                        <p class="text-sm text-gray-600">Computer Science, Class of 2026</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-600">"The opportunities at Westfield have been incredible. From research projects to internships with leading tech companies, I've been able to apply what I've learned in real-world settings."</p>
+                            </div>
+                            <div class="testimonial hidden">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                                        <img src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20diverse%20male%20student%2C%20natural%20lighting%2C%20neutral%20background%2C%20smiling%2C%20confident%2C%20high%20quality%20portrait&width=100&height=100&seq=student2&orientation=squarish" alt="Student" class="w-full h-full object-cover object-top">
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">Marcus Johnson</h4>
+                                        <p class="text-sm text-gray-600">Business Administration, Class of 2025</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-600">"The faculty at Westfield are not just professors but mentors who genuinely care about your success. The connections I've made here have opened doors I never thought possible."</p>
+                            </div>
+                            <div class="testimonial hidden">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                                        <img src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20diverse%20female%20student%20with%20glasses%2C%20natural%20lighting%2C%20neutral%20background%2C%20smiling%2C%20confident%2C%20high%20quality%20portrait&width=100&height=100&seq=student3&orientation=squarish" alt="Student" class="w-full h-full object-cover object-top">
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">Sophia Chen</h4>
+                                        <p class="text-sm text-gray-600">Biomedical Engineering, Class of 2024</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-600">"The collaborative environment at Westfield encourages innovation. Working alongside brilliant peers and faculty has pushed me to think beyond traditional boundaries in my research."</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-center mt-6 space-x-2">
+                            <button class="w-3 h-3 rounded-full bg-primary" id="testimonial-dot-0"></button>
+                            <button class="w-3 h-3 rounded-full bg-gray-300" id="testimonial-dot-1"></button>
+                            <button class="w-3 h-3 rounded-full bg-gray-300" id="testimonial-dot-2"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Virtual Tour -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-semibold mb-4">Take a Virtual Tour</h3>
+                        <p class="text-gray-600 mb-6">Can't visit campus in person? Explore Westfield University through our immersive virtual tour. Visit classrooms, residence halls, dining facilities, and more from anywhere in the world.</p>
+                        <a href="#" class="bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-primary/90 transition duration-200 inline-flex items-center whitespace-nowrap">
+                            <div class="w-5 h-5 flex items-center justify-center mr-2">
+                                <i class="ri-play-circle-line"></i>
+                            </div>
+                            Start Virtual Tour
+                        </a>
+                    </div>
+                    <div class="h-64 lg:h-auto bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=aerial%20view%20of%20beautiful%20university%20campus%20with%20modern%20buildings%2C%20green%20spaces%2C%20walking%20paths%2C%20students%2C%20bright%20day%2C%20professional%20photography%2C%20high%20resolution&width=800&height=500&seq=campus5&orientation=landscape')"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-primary">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-white mb-6">Ready to Join the Westfield Community?</h2>
+            <p class="text-white/90 max-w-2xl mx-auto mb-8">Take the first step toward a transformative educational experience. Apply now or schedule a campus visit to learn more about what Westfield University has to offer.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#" class="bg-white text-primary px-6 py-3 rounded-button font-medium hover:bg-gray-100 transition duration-200 whitespace-nowrap">Apply Now</a>
+                <a href="#" class="bg-transparent text-white border-2 border-white px-6 py-3 rounded-button font-medium hover:bg-white/10 transition duration-200 whitespace-nowrap">Schedule a Visit</a>
+                <a href="#" class="bg-transparent text-white border-2 border-white px-6 py-3 rounded-button font-medium hover:bg-white/10 transition duration-200 whitespace-nowrap">Request Information</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <a href="#" class="font-['Pacifico'] text-3xl text-white mb-6 block">SSWebTech</a>
+                    <p class="text-gray-400 mb-6">Westfield University is dedicated to excellence in education, research, and service to society.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition duration-200">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition duration-200">
+                            <i class="ri-twitter-x-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition duration-200">
+                            <i class="ri-instagram-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition duration-200">
+                            <i class="ri-linkedin-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition duration-200">
+                            <i class="ri-youtube-fill"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-200">Academic Calendar</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-200">Campus Map</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-200">Directory</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-200">Employment</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-200">Library</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-200">Giving</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-200">Athletics</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Contact Us</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5">
+                                <i class="ri-map-pin-line"></i>
+                            </div>
+                            <span class="text-gray-400">1234 University Avenue<br>Westfield, CA 90210</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 flex items-center justify-center mr-2">
+                                <i class="ri-phone-line"></i>
+                            </div>
+                            <a href="tel:+12345678900" class="text-gray-400 hover:text-white transition duration-200">(234) 567-8900</a>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 flex items-center justify-center mr-2">
+                                <i class="ri-mail-line"></i>
+                            </div>
+                            <a href="mailto:info@westfield.edu" class="text-gray-400 hover:text-white transition duration-200">info@westfield.edu</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Subscribe to our newsletter to receive updates and news.</p>
+                    <form class="mb-4">
+                        <div class="flex">
+                            <input type="email" placeholder="Your email address" class="bg-gray-800 text-white px-4 py-2 rounded-l-button focus:outline-none focus:ring-2 focus:ring-primary w-full border-none">
+                            <button type="submit" class="bg-primary text-white px-4 py-2 rounded-r-button hover:bg-primary/90 transition duration-200 whitespace-nowrap">Subscribe</button>
+                        </div>
+                    </form>
+                    <label class="custom-checkbox text-gray-400 text-sm">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        I agree to receive news and updates
+                    </label>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-sm mb-4 md:mb-0">&copy; 2025 Westfield University. All rights reserved.</p>
+                    <div class="flex flex-wrap gap-4 text-sm">
+                        <a href="#" class="text-gray-500 hover:text-white transition duration-200">Privacy Policy</a>
+                        <a href="#" class="text-gray-500 hover:text-white transition duration-200">Terms of Use</a>
+                        <a href="#" class="text-gray-500 hover:text-white transition duration-200">Accessibility</a>
+                        <a href="#" class="text-gray-500 hover:text-white transition duration-200">Emergency Information</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cookie Notice -->
+    <div id="cookie-notice" class="cookie-notice fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="mb-4 md:mb-0 md:mr-8">
+                    <p class="text-gray-800">We use cookies to enhance your experience on our website. By continuing to browse, you agree to our <a href="#" class="text-primary hover:underline">Cookie Policy</a>.</p>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <button id="accept-cookies" class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition duration-200 whitespace-nowrap">Accept All</button>
+                    <button id="customize-cookies" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-button font-medium hover:bg-gray-300 transition duration-200 whitespace-nowrap">Customize</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility Panel -->
+    <div id="accessibility-panel" class="accessibility-panel">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-xl font-semibold">Accessibility Options</h3>
+            <button id="close-accessibility" class="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700">
+                <i class="ri-close-line text-xl"></i>
+            </button>
+        </div>
+        <div class="space-y-6">
+            <div>
+                <h4 class="font-medium mb-3">Text Size</h4>
+                <div class="flex space-x-2">
+                    <button class="bg-gray-200 text-gray-800 px-3 py-1 rounded-button text-sm hover:bg-gray-300 transition duration-200 whitespace-nowrap">A-</button>
+                    <button class="bg-gray-200 text-gray-800 px-3 py-1 rounded-button text-sm hover:bg-gray-300 transition duration-200 whitespace-nowrap">A</button>
+                    <button class="bg-gray-200 text-gray-800 px-3 py-1 rounded-button text-sm hover:bg-gray-300 transition duration-200 whitespace-nowrap">A+</button>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-medium mb-3">Contrast</h4>
+                <div class="flex space-x-2">
+                    <button class="bg-gray-200 text-gray-800 px-3 py-1 rounded-button text-sm hover:bg-gray-300 transition duration-200 whitespace-nowrap">Normal</button>
+                    <button class="bg-gray-800 text-white px-3 py-1 rounded-button text-sm hover:bg-gray-700 transition duration-200 whitespace-nowrap">High Contrast</button>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-medium mb-3">Animation</h4>
+                <label class="custom-checkbox text-gray-700">
+                    <input type="checkbox" id="reduce-motion">
+                    <span class="checkmark"></span>
+                    Reduce motion
+                </label>
+            </div>
+            <div>
+                <h4 class="font-medium mb-3">Reading Guide</h4>
+                <label class="custom-checkbox text-gray-700">
+                    <input type="checkbox" id="reading-guide">
+                    <span class="checkmark"></span>
+                    Enable reading guide
+                </label>
+            </div>
+            <div class="pt-4 border-t border-gray-200">
+                <button class="bg-primary text-white px-4 py-2 w-full rounded-button font-medium hover:bg-primary/90 transition duration-200 whitespace-nowrap">Save Preferences</button>
+            </div>
+        </div>
+    </div>
+
+    <script id="mobile-menu-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                if (mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.remove('hidden');
+                } else {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+
+    <script id="testimonials-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const testimonials = document.querySelectorAll('.testimonial');
+            const dots = document.querySelectorAll('[id^="testimonial-dot-"]');
+            let currentIndex = 0;
+            
+            function showTestimonial(index) {
+                testimonials.forEach((testimonial, i) => {
+                    if (i === index) {
+                        testimonial.classList.remove('hidden');
+                    } else {
+                        testimonial.classList.add('hidden');
+                    }
+                });
+                
+                dots.forEach((dot, i) => {
+                    if (i === index) {
+                        dot.classList.remove('bg-gray-300');
+                        dot.classList.add('bg-primary');
+                    } else {
+                        dot.classList.remove('bg-primary');
+                        dot.classList.add('bg-gray-300');
+                    }
+                });
+                
+                currentIndex = index;
+            }
+            
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showTestimonial(index);
+                });
+            });
+            
+            // Auto rotate testimonials every 5 seconds
+            setInterval(() => {
+                let nextIndex = (currentIndex + 1) % testimonials.length;
+                showTestimonial(nextIndex);
+            }, 5000);
+        });
+    </script>
+
+    <script id="cookie-notice-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const cookieNotice = document.getElementById('cookie-notice');
+            const acceptCookies = document.getElementById('accept-cookies');
+            const customizeCookies = document.getElementById('customize-cookies');
+            
+            // Check if user has already accepted cookies
+            if (!localStorage.getItem('cookiesAccepted')) {
+                cookieNotice.style.display = 'block';
+            }
+            
+            acceptCookies.addEventListener('click', function() {
+                localStorage.setItem('cookiesAccepted', 'true');
+                cookieNotice.style.display = 'none';
+            });
+            
+            customizeCookies.addEventListener('click', function() {
+                // This would typically open a cookie preferences modal
+                // For now, just accept all cookies
+                localStorage.setItem('cookiesAccepted', 'true');
+                cookieNotice.style.display = 'none';
+            });
+        });
+    </script>
+
+    <script id="accessibility-panel-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const accessibilityToggle = document.getElementById('accessibility-toggle');
+            const accessibilityPanel = document.getElementById('accessibility-panel');
+            const closeAccessibility = document.getElementById('close-accessibility');
+            
+            accessibilityToggle.addEventListener('click', function() {
+                accessibilityPanel.style.display = 'block';
+            });
+            
+            closeAccessibility.addEventListener('click', function() {
+                accessibilityPanel.style.display = 'none';
+            });
+        });
+    </script>
+
+    <script id="language-dropdown-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const languageButton = document.getElementById('language-button');
+            const languageDropdown = document.getElementById('language-dropdown');
+            
+            languageButton.addEventListener('click', function() {
+                if (languageDropdown.style.display === 'block') {
+                    languageDropdown.style.display = 'none';
+                } else {
+                    languageDropdown.style.display = 'block';
+                }
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!languageButton.contains(event.target) && !languageDropdown.contains(event.target)) {
+                    languageDropdown.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+    <script id="emergency-alert-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const emergencyAlert = document.getElementById('emergency-alert');
+            const closeAlert = document.getElementById('close-alert');
+            
+            // For demo purposes, show emergency alert after 10 seconds
+            setTimeout(() => {
+                emergencyAlert.classList.remove('hidden');
+            }, 10000);
+            
+            closeAlert.addEventListener('click', function() {
+                emergencyAlert.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
